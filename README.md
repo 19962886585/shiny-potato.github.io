@@ -102,26 +102,26 @@
 
     <!-- 翻页容器（核心） -->
     <div id="pageContainer" class="h-full w-full">
-        <!-- 首页（第0页）【文字放大核心修改】 -->
+        <!-- 首页（第0页） -->
         <section id="home" class="page-section flex items-end bg-gradient-to-r from-[#E9ECEF] to-[#F8F9FA] pb-16 md:pb-24">
             <div class="absolute inset-0 z-0">
                 <div class="absolute top-20 left-10 w-32 h-32 rounded-full bg-primary/10 blur-2xl"></div>
                 <div class="absolute bottom-20 right-10 w-48 h-48 rounded-full bg-secondary/10 blur-2xl"></div>
             </div>
             
-            <!-- 左侧竖排文字（放大：3rem→4rem，5rem→6rem） -->
+            <!-- 左侧竖排文字 -->
             <div class="absolute left-4 md:left-10 top-1/2 transform -translate-y-1/2 z-10 animate-fade-in">
-                <h1 class="vertical-text text-[clamp(4rem,12vw,6rem)] font-bold text-shadow text-secondary/90">
+                <h1 class="vertical-text text-[clamp(3rem,10vw,5rem)] font-bold text-shadow text-secondary/90">
                     设计
                 </h1>
             </div>
 
-            <!-- 底部核心文案（标题放大：2rem→2.5rem，4rem→5rem；副标题放大：1rem→1.2rem，1.25rem→1.5rem） -->
+            <!-- 底部核心文案 -->
             <div class="container mx-auto px-4 md:px-16 lg:px-24 z-10 text-center w-full animate-page-fade">
-                <h2 class="text-[clamp(2.5rem,8vw,5rem)] font-bold leading-tight text-shadow animate-fade-in">
+                <h2 class="text-[clamp(2rem,7vw,4rem)] font-bold leading-tight text-shadow animate-fade-in">
                     <span class="text-primary">创意无限</span>
                 </h2>
-                <p class="mt-6 text-[clamp(1.2rem,4vw,1.5rem)] text-secondary/80 max-w-2xl mx-auto animate-slide-up">
+                <p class="mt-6 text-[clamp(1rem,3vw,1.25rem)] text-secondary/80 max-w-2xl mx-auto animate-slide-up">
                     专注平面设计、UI/UX、品牌视觉、插画创作，用设计传递价值与美感
                 </p>
                 <div class="mt-10 flex flex-col sm:flex-row justify-center gap-4 animate-slide-up">
@@ -142,7 +142,7 @@
             </div>
         </section>
 
-        <!-- 关于我（第1页） -->
+        <!-- 关于我（第1页）【核心修改区域】 -->
         <section id="about" class="page-section py-20 bg-white hidden">
             <div class="container mx-auto px-4 md:px-8 h-full flex flex-col justify-center animate-page-fade">
                 <div class="text-center mb-16">
@@ -157,7 +157,7 @@
                             <div class="absolute inset-0 bg-primary/20 rounded-lg mix-blend-overlay"></div>
                         </div>
                     </div>
-                    <!-- 个人信息 -->
+                    <!-- 个人信息（修改后的内容） -->
                     <div class="w-full md:w-2/3">
                         <h3 class="text-2xl font-bold mb-4">CR | 设计专业学生</h3>
                         <p class="text-secondary/80 mb-6 leading-relaxed">
@@ -165,7 +165,7 @@
                             目前正在系统学习各类设计知识与技能，持续打磨设计基础能力及审美素养，积极参与校内实践项目以积累经验，
                             热爱探索不同风格的设计表达形式，致力于用设计解决实际问题、传递真实情感。
                         </p>
-                        <!-- 核心信息卡片 -->
+                        <!-- 核心信息卡片（适配修改） -->
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
                             <div class="bg-neutral p-6 rounded-lg shadow-sm">
                                 <h4 class="font-bold text-lg mb-2 flex items-center">
@@ -518,14 +518,14 @@
         </section>
     </div>
 
-    <!-- 页脚（翻页模式下固定在底部）【核心缩小修改】 -->
-    <footer class="fixed bottom-0 w-full py-1 bg-secondary/90 text-white z-40">
-        <div class="container mx-auto px-3 md:px-6">
+    <!-- 页脚（翻页模式下固定在底部） -->
+    <footer class="fixed bottom-0 w-full py-4 bg-secondary/90 text-white z-40">
+        <div class="container mx-auto px-4 md:px-8">
             <div class="flex flex-col md:flex-row justify-between items-center">
-                <div class="mb-1 md:mb-0">
-                    <p class="text-white/60 text-xs">&copy; 2024 CR Design. 保留所有权利。</p>
+                <div class="mb-2 md:mb-0">
+                    <p class="text-white/60 text-sm">&copy; 2024 CR Design. 保留所有权利。</p>
                 </div>
-                <div class="flex space-x-2 text-xs">
+                <div class="flex space-x-4 text-sm">
                     <a href="#home" class="text-white/60 hover:text-primary transition-colors" data-page="0">首页</a>
                     <a href="#about" class="text-white/60 hover:text-primary transition-colors" data-page="1">关于我</a>
                     <a href="#portfolio" class="text-white/60 hover:text-primary transition-colors" data-page="2">作品集</a>
