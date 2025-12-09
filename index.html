@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>XXX | 视觉传达设计</title>
+    <title>CR | 设计</title>
     <!-- 引入Tailwind CSS（快速实现响应式设计） -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- 引入Font Awesome（图标库） -->
@@ -46,6 +46,11 @@
             .hover-scale { transition: transform 0.3s ease; }
             .hover-scale:hover { transform: scale(1.03); }
             .nav-active { border-bottom: 2px solid theme('colors.primary'); }
+            /* 竖排文字样式 */
+            .vertical-text {
+                writing-mode: vertical-rl;
+                text-orientation: upright;
+            }
         }
     </style>
 </head>
@@ -53,7 +58,7 @@
     <!-- 导航栏（固定顶部，滚动时变化） -->
     <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 bg-white/90 backdrop-blur-sm shadow-sm">
         <div class="container mx-auto px-4 md:px-8 py-4 flex justify-between items-center">
-            <a href="#" class="text-2xl font-bold text-primary">XXX Design</a>
+            <a href="#" class="text-2xl font-bold text-primary">CR Design</a>
             <!-- 桌面端导航 -->
             <div class="hidden md:flex space-x-8 text-lg">
                 <a href="#home" class="nav-active hover:text-primary transition-colors">首页</a>
@@ -79,17 +84,26 @@
         </div>
     </nav>
 
-    <!-- 首页封面 -->
-    <section id="home" class="min-h-screen flex items-center justify-center bg-neutral relative overflow-hidden">
+    <!-- 首页封面（核心文案下移至底部） -->
+    <section id="home" class="min-h-screen flex items-end relative overflow-hidden bg-gradient-to-r from-[#E9ECEF] to-[#F8F9FA] pb-16 md:pb-24">
         <div class="absolute inset-0 z-0">
-            <!-- 背景装饰（设计感几何图形） -->
+            <!-- 背景装饰 -->
             <div class="absolute top-20 left-10 w-32 h-32 rounded-full bg-primary/10 blur-2xl"></div>
             <div class="absolute bottom-20 right-10 w-48 h-48 rounded-full bg-secondary/10 blur-2xl"></div>
         </div>
-        <div class="container mx-auto px-4 md:px-8 z-10 text-center">
-            <h1 class="text-[clamp(2.5rem,8vw,4.5rem)] font-bold leading-tight text-shadow animate-fade-in">
-                视觉传达设计<br><span class="text-primary">创意无限</span>
+        
+        <!-- 左侧竖排「设计」文字 -->
+        <div class="absolute left-4 md:left-10 top-1/2 transform -translate-y-1/2 z-10 animate-fade-in">
+            <h1 class="vertical-text text-[clamp(3rem,10vw,5rem)] font-bold text-shadow text-secondary/90">
+                设计
             </h1>
+        </div>
+
+        <!-- 底部核心文案区域（整体下移至底部） -->
+        <div class="container mx-auto px-4 md:px-16 lg:px-24 z-10 text-center w-full">
+            <h2 class="text-[clamp(2rem,7vw,4rem)] font-bold leading-tight text-shadow animate-fade-in">
+                <span class="text-primary">创意无限</span>
+            </h2>
             <p class="mt-6 text-[clamp(1rem,3vw,1.25rem)] text-secondary/80 max-w-2xl mx-auto animate-slide-up">
                 专注平面设计、UI/UX、品牌视觉、插画创作，用设计传递价值与美感
             </p>
@@ -101,12 +115,13 @@
                     联系我
                 </a>
             </div>
-            <!-- 滚动提示 -->
-            <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
-                <a href="#about" class="text-secondary/60 hover:text-primary transition-colors">
-                    <i class="fa fa-chevron-down text-2xl"></i>
-                </a>
-            </div>
+        </div>
+
+        <!-- 滚动提示（上移，避免与底部文案重叠） -->
+        <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 animate-bounce z-10">
+            <a href="#about" class="text-secondary/60 hover:text-primary transition-colors">
+                <i class="fa fa-chevron-down text-2xl"></i>
+            </a>
         </div>
     </section>
 
@@ -118,7 +133,7 @@
                 <div class="w-20 h-1 bg-primary mx-auto mt-4"></div>
             </div>
             <div class="flex flex-col md:flex-row items-center gap-12">
-                <!-- 个人照片（替换为你的设计感照片） -->
+                <!-- 个人照片 -->
                 <div class="w-full md:w-1/3">
                     <div class="relative hover-scale">
                         <img src="https://picsum.photos/id/64/600/800" alt="个人照片" class="w-full h-auto rounded-lg shadow-xl object-cover">
@@ -127,7 +142,7 @@
                 </div>
                 <!-- 个人信息 -->
                 <div class="w-full md:w-2/3">
-                    <h3 class="text-2xl font-bold mb-4">XXX | 视觉传达设计师</h3>
+                    <h3 class="text-2xl font-bold mb-4">CR | 设计师</h3>
                     <p class="text-secondary/80 mb-6 leading-relaxed">
                         现就读于XX大学视觉传达设计专业，擅长将创意理念转化为视觉作品，注重细节与用户体验。
                         在校期间参与多项设计比赛并获奖，积累了平面设计、品牌视觉、UI设计等实践经验，
@@ -500,7 +515,7 @@
         <div class="container mx-auto px-4 md:px-8">
             <div class="flex flex-col md:flex-row justify-between items-center">
                 <div class="mb-4 md:mb-0">
-                    <p class="text-white/60">&copy; 2024 XXX Design. 保留所有权利。</p>
+                    <p class="text-white/60">&copy; 2024 CR Design. 保留所有权利。</p>
                 </div>
                 <div class="flex space-x-6">
                     <a href="#home" class="text-white/60 hover:text-primary transition-colors">首页</a>
