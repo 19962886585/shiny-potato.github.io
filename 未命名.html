@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -21,11 +20,14 @@
                     },
                     fontFamily: {
                         sans: ['Inter', 'system-ui', 'sans-serif'],
+                        // 新增：定义黑体字体家族
+                        heiti: ['SimHei', '黑体', 'Microsoft YaHei', 'sans-serif'],
                     },
                     animation: {
                         'fade-in': 'fadeIn 0.8s ease-in-out',
                         'slide-up': 'slideUp 1s ease-out',
                         'page-fade': 'pageFade 0.5s ease-in-out',
+                        'text-pulse': 'textPulse 3s ease-in-out infinite',
                     },
                     keyframes: {
                         fadeIn: {
@@ -40,6 +42,10 @@
                             '0%': { opacity: '0.8', transform: 'translateY(20px)' },
                             '100%': { opacity: '1', transform: 'translateY(0)' },
                         },
+                        textPulse: {
+                            '0%, 100%': { opacity: '1' },
+                            '50%': { opacity: '0.85' },
+                        },
                     },
                 }
             }
@@ -48,7 +54,8 @@
     <style type="text/tailwindcss">
         @layer utilities {
             .content-auto { content-visibility: auto; }
-            .text-shadow { text-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+            .text-shadow { text-shadow: 0 2px 8px rgba(0,0,0,0.12); }
+            .text-shadow-lg { text-shadow: 0 4px 12px rgba(0,0,0,0.15); }
             .hover-scale { transition: transform 0.3s ease; }
             .hover-scale:hover { transform: scale(1.03); }
             .nav-active { border-bottom: 2px solid theme('colors.primary'); }
@@ -68,103 +75,138 @@
                 overflow: hidden;
                 transition: all 0.5s ease-in-out;
             }
+            /* 自定义滚动条（参考站风格） */
+            ::-webkit-scrollbar { display: none; }
+            /* 按钮水波纹效果 */
+            .btn-ripple {
+                position: relative;
+                overflow: hidden;
+            }
+            .btn-ripple:after {
+                content: "";
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                width: 0;
+                height: 0;
+                background: rgba(255,255,255,0.2);
+                border-radius: 50%;
+                transform: translate(-50%, -50%);
+                transition: width 0.6s ease, height 0.6s ease;
+            }
+            .btn-ripple:hover:after {
+                width: 300px;
+                height: 300px;
+            }
+            /* 水面Canvas样式 */
+            #waterCanvas {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                z-index: 0;
+                pointer-events: none; /* 不阻挡鼠标事件 */
+                opacity: 0.8;
+            }
         }
     </style>
 </head>
 <body class="bg-white text-secondary font-sans antialiased">
-    <!-- 导航栏（固定顶部）- 移除技能导航项，调整联系页页码为3 -->
-    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 bg-white/90 backdrop-blur-sm shadow-sm">
-        <div class="container mx-auto px-4 md:px-8 py-4 flex justify-between items-center">
-            <a href="#" class="text-2xl font-bold text-primary">CR Design</a>
-            <!-- 桌面端导航 -->
-            <div class="hidden md:flex space-x-8 text-lg">
-                <a href="#home" class="nav-active hover:text-primary transition-colors" data-page="0">首页</a>
-                <a href="#about" class="hover:text-primary transition-colors" data-page="1">关于我</a>
-                <a href="#portfolio" class="hover:text-primary transition-colors" data-page="2">作品集</a>
-                <a href="#contact" class="hover:text-primary transition-colors" data-page="3">联系</a>
+    <!-- 导航栏（优化透明度，贴近参考站极简风格） -->
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-500 bg-white/80 backdrop-blur-md shadow-none">
+        <div class="container mx-auto px-4 md:px-8 py-5 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-primary tracking-tight">CR Design</a>
+            <!-- 桌面端导航（简化间距和样式）- 新增font-heiti类应用黑体 -->
+            <div class="hidden md:flex space-x-10 text-lg font-medium font-heiti">
+                <a href="#home" class="nav-active hover:text-primary transition-colors duration-300" data-page="0">首页</a>
+                <a href="#about" class="hover:text-primary transition-colors duration-300" data-page="1">关于我</a>
+                <a href="#portfolio" class="hover:text-primary transition-colors duration-300" data-page="2">作品集</a>
+                <a href="#contact" class="hover:text-primary transition-colors duration-300" data-page="3">联系</a>
             </div>
-            <!-- 移动端菜单按钮 -->
-            <button id="menuBtn" class="md:hidden text-2xl">
+            <!-- 移动端菜单按钮（简化样式） -->
+            <button id="menuBtn" class="md:hidden text-xl text-secondary">
                 <i class="fa fa-bars"></i>
             </button>
         </div>
-        <!-- 移动端导航菜单 - 移除技能导航项，调整联系页页码为3 -->
-        <div id="mobileMenu" class="hidden md:hidden bg-white shadow-lg absolute w-full">
-            <div class="container mx-auto px-4 py-4 flex flex-col space-y-4 text-lg">
-                <a href="#home" class="py-2 nav-active hover:text-primary transition-colors" data-page="0">首页</a>
-                <a href="#about" class="py-2 hover:text-primary transition-colors" data-page="1">关于我</a>
-                <a href="#portfolio" class="py-2 hover:text-primary transition-colors" data-page="2">作品集</a>
-                <a href="#contact" class="py-2 hover:text-primary transition-colors" data-page="3">联系</a>
+        <!-- 移动端导航菜单（优化样式）- 新增font-heiti类应用黑体 -->
+        <div id="mobileMenu" class="hidden md:hidden bg-white/95 backdrop-blur-md shadow-lg absolute w-full">
+            <div class="container mx-auto px-4 py-4 flex flex-col space-y-4 text-lg font-medium font-heiti">
+                <a href="#home" class="py-3 nav-active hover:text-primary transition-colors duration-300" data-page="0">首页</a>
+                <a href="#about" class="py-3 hover:text-primary transition-colors duration-300" data-page="1">关于我</a>
+                <a href="#portfolio" class="py-3 hover:text-primary transition-colors duration-300" data-page="2">作品集</a>
+                <a href="#contact" class="py-3 hover:text-primary transition-colors duration-300" data-page="3">联系</a>
             </div>
         </div>
     </nav>
 
-    <!-- 翻页容器（核心）- 移除skills板块 -->
+    <!-- 翻页容器 -->
     <div id="pageContainer" class="h-full w-full">
-        <!-- 首页（第0页） -->
-        <section id="home" class="page-section flex items-end bg-gradient-to-r from-[#E9ECEF] to-[#F8F9FA] pb-16 md:pb-24">
-            <div class="absolute inset-0 z-0">
-                <div class="absolute top-20 left-10 w-32 h-32 rounded-full bg-primary/10 blur-2xl"></div>
-                <div class="absolute bottom-20 right-10 w-48 h-48 rounded-full bg-secondary/10 blur-2xl"></div>
-            </div>
+        <!-- 首页（核心优化：水面波纹背景） -->
+        <section id="home" class="page-section flex items-center justify-center bg-gradient-to-br from-[#fafbfc] to-[#eef2f5]">
+            <!-- 水面波纹Canvas（核心新增） -->
+            <canvas id="waterCanvas"></canvas>
             
-            <!-- 左侧竖排文字 -->
-            <div class="absolute left-4 md:left-10 top-1/2 transform -translate-y-1/2 z-10 animate-fade-in">
-                <h1 class="vertical-text text-[clamp(4rem,12vw,6rem)] font-bold text-shadow text-secondary/90">
-                    设计
-                </h1>
-            </div>
-
-            <!-- 底部核心文案 -->
-            <div class="container mx-auto px-4 md:px-16 lg:px-24 z-10 text-center w-full animate-page-fade">
-                <h2 class="text-[clamp(2.5rem,8vw,5rem)] font-bold leading-tight text-shadow animate-fade-in">
-                    <span class="text-primary">创意无限</span>
-                </h2>
-                <p class="mt-6 text-[clamp(1.2rem,4vw,1.5rem)] text-secondary/80 max-w-2xl mx-auto animate-slide-up">
-                    专注平面设计、UI/UX、品牌视觉、插画创作，用设计传递价值与美感
+            <!-- 核心视觉内容（居中布局，参考站层级感） -->
+            <div class="container mx-auto px-4 md:px-12 lg:px-20 z-10 text-center">
+                <!-- 顶部小字标签（参考站引导文案） -->
+                <p class="text-primary font-medium text-sm md:text-base tracking-widest uppercase mb-6 animate-fade-in">
+                    Visual Design & Creative Thinking
                 </p>
-                <div class="mt-10 flex flex-col sm:flex-row justify-center gap-4 animate-slide-up">
-                    <a href="#portfolio" class="px-8 py-3 bg-primary text-white rounded-lg font-medium hover:bg-primary/90 transition-colors shadow-lg" data-page="2">
-                        查看作品集
+                
+                <!-- 主标题（超大字号+精简文案，参考站视觉焦点） -->
+                <h1 class="text-[clamp(3.5rem,10vw,6.5rem)] font-bold leading-none text-secondary text-shadow-lg mb-8 animate-slide-up">
+                    创意<br class="md:hidden">
+                    <span class="text-primary animate-text-pulse">设计</span>
+                    <span class="text-secondary/90">无界</span>
+                </h1>
+                
+                <!-- 副标题（精简+高质感） -->
+                <p class="text-secondary/70 text-lg md:text-xl max-w-2xl mx-auto mb-12 leading-relaxed animate-slide-up" style="animation-delay: 0.2s;">
+                    以视觉语言传递价值，用创意思维解决问题<br class="md:hidden">
+                    专注平面设计、品牌视觉、UI/UX 与插画创作
+                </p>
+                
+                <!-- 按钮组（参考站精致按钮风格） -->
+                <div class="flex flex-col sm:flex-row justify-center gap-4 md:gap-6 animate-slide-up" style="animation-delay: 0.4s;">
+                    <a href="#portfolio" class="btn-ripple px-8 py-4 bg-primary text-white rounded-lg font-medium shadow-lg hover:bg-primary/95 transition-all duration-300 hover:shadow-xl transform hover:-translate-y-1" data-page="2">
+                        浏览作品集 <i class="fa fa-arrow-right ml-2"></i>
                     </a>
-                    <a href="#contact" class="px-8 py-3 border-2 border-secondary text-secondary rounded-lg font-medium hover:bg-secondary hover:text-white transition-colors" data-page="3">
-                        联系我
+                    <a href="#about" class="btn-ripple px-8 py-4 bg-white/60 backdrop-blur-sm text-secondary border border-secondary/10 rounded-lg font-medium hover:bg-white/80 transition-all duration-300 hover:shadow-md transform hover:-translate-y-1" data-page="1">
+                        了解我的故事
                     </a>
                 </div>
             </div>
 
-            <!-- 翻页提示（下一页） -->
-            <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 animate-bounce z-10">
-                <button class="text-secondary/60 hover:text-primary transition-colors" id="nextPageBtn">
-                    <i class="fa fa-chevron-down text-2xl"></i>
+            <!-- 翻页提示（简化样式，参考站低调引导） -->
+            <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10 animate-bounce">
+                <button class="text-secondary/40 hover:text-primary transition-colors duration-300" id="nextPageBtn">
+                    <i class="fa fa-chevron-down text-xl"></i>
                 </button>
             </div>
         </section>
 
-        <!-- 关于我（第1页）- 保留核心技能卡片（非独立技能模块） -->
+        <!-- 关于我（保持原有优化后的并列布局） -->
         <section id="about" class="page-section py-20 bg-white hidden">
             <div class="container mx-auto px-4 md:px-8 h-full flex flex-col justify-center animate-page-fade">
                 <div class="text-center mb-16">
                     <h2 class="text-[clamp(1.8rem,5vw,2.5rem)] font-bold">关于我</h2>
                     <div class="w-20 h-1 bg-primary mx-auto mt-4"></div>
                 </div>
-                <div class="flex flex-col md:flex-row items-center gap-12">
-                    <!-- 个人照片 -->
-                    <div class="w-full md:w-1/3">
-                        <div class="relative hover-scale">
-                            <img src="https://picsum.photos/id/177/600/800" alt="个人照片" class="w-full h-auto rounded-lg shadow-xl object-cover">
+                <div class="flex flex-col md:flex-row items-start gap-8 md:gap-12 w-full max-w-6xl mx-auto">
+                    <div class="w-full md:w-[35%] flex-shrink-0">
+                        <div class="relative hover-scale w-full h-auto">
+                            <img src="https://i.postimg.cc/cLyW5WZ9/wei-xin-tu-pian-20251209201428-80-100.jpg" alt="个人照片" class="w-full h-auto rounded-lg shadow-xl object-cover">
                             <div class="absolute inset-0 bg-primary/20 rounded-lg mix-blend-overlay"></div>
                         </div>
                     </div>
-                    <!-- 个人信息 -->
-                    <div class="w-full md:w-2/3">
+                    <div class="w-full md:w-[65%] flex flex-col justify-start">
                         <h3 class="text-2xl font-bold mb-4">CR | 设计专业学生</h3>
                         <p class="text-secondary/80 mb-6 leading-relaxed">
                             现就读于苏州大学视觉传达设计专业，擅长将创意理念转化为视觉作品，注重细节与作品表达。
                             目前正在系统学习各类设计知识与技能，持续打磨设计基础能力及审美素养，积极参与校内实践项目以积累经验，
                             热爱探索不同风格的设计表达形式，致力于用设计解决实际问题、传递真实情感。
                         </p>
-                        <!-- 核心信息卡片 -->
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
                             <div class="bg-neutral p-6 rounded-lg shadow-sm">
                                 <h4 class="font-bold text-lg mb-2 flex items-center">
@@ -191,7 +233,6 @@
                                 <p>视觉传达 | 平面设计 | 品牌视觉 | 设计基础 | 审美培养</p>
                             </div>
                         </div>
-                        <!-- 下载简历按钮 -->
                         <a href="你的简历链接" target="_blank" class="inline-flex items-center px-6 py-3 bg-secondary text-white rounded-lg hover:bg-secondary/90 transition-colors">
                             <i class="fa fa-download mr-2"></i> 下载简历
                         </a>
@@ -200,7 +241,7 @@
             </div>
         </section>
 
-        <!-- 作品集（第2页） -->
+        <!-- 作品集（核心修改：替换图片链接） -->
         <section id="portfolio" class="page-section py-20 bg-neutral hidden">
             <div class="container mx-auto px-4 md:px-8 h-full flex flex-col justify-center animate-page-fade">
                 <div class="text-center mb-16">
@@ -210,8 +251,6 @@
                         精选近期设计作品，涵盖平面、品牌、UI等多个领域，记录我的设计成长
                     </p>
                 </div>
-
-                <!-- 作品分类筛选 -->
                 <div class="flex flex-wrap justify-center gap-4 mb-12">
                     <button class="filter-btn active px-6 py-2 rounded-full bg-primary text-white" data-filter="all">全部</button>
                     <button class="filter-btn px-6 py-2 rounded-full bg-white text-secondary hover:bg-primary hover:text-white transition-colors" data-filter="graphic">平面设计</button>
@@ -219,54 +258,52 @@
                     <button class="filter-btn px-6 py-2 rounded-full bg-white text-secondary hover:bg-primary hover:text-white transition-colors" data-filter="ui">UI设计</button>
                     <button class="filter-btn px-6 py-2 rounded-full bg-white text-secondary hover:bg-primary hover:text-white transition-colors" data-filter="illustration">插画</button>
                 </div>
-
-                <!-- 作品网格 -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- 作品1-平面设计（杂志排版） -->
+                    <!-- 替换第1张图片 -->
                     <div class="portfolio-item hover-scale" data-category="graphic">
                         <div class="relative overflow-hidden rounded-lg shadow-lg">
-                            <img src="https://picsum.photos/id/30/600/400" alt="杂志排版设计" class="w-full h-64 object-cover transition-transform duration-500 hover:scale-110">
+                            <img src="https://i.postimg.cc/63vdMBYx/wei-xin-tu-pian-20251124200021-49-2.jpg" alt="设计作品1" class="w-full h-64 object-cover transition-transform duration-500 hover:scale-110">
                             <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
-                                <h3 class="text-white text-xl font-bold">杂志排版设计</h3>
-                                <p class="text-white/80 mt-2">基于极简风格的时尚杂志内页排版</p>
+                                <h3 class="text-white text-xl font-bold">设计作品1</h3>
+                                <p class="text-white/80 mt-2">基于极简风格的设计创作</p>
                                 <a href="#" class="mt-4 inline-block text-primary hover:text-white transition-colors">查看详情 <i class="fa fa-arrow-right ml-1"></i></a>
                             </div>
                         </div>
                     </div>
-                    <!-- 作品2-品牌视觉（咖啡品牌） -->
+                    <!-- 替换第2张图片 -->
                     <div class="portfolio-item hover-scale" data-category="brand">
                         <div class="relative overflow-hidden rounded-lg shadow-lg">
-                            <img src="https://picsum.photos/id/431/600/400" alt="咖啡品牌视觉系统" class="w-full h-64 object-cover transition-transform duration-500 hover:scale-110">
+                            <img src="https://i.postimg.cc/pVC8MKZz/wei-xin-tu-pian-20251124200020-48-2.jpg" alt="设计作品2" class="w-full h-64 object-cover transition-transform duration-500 hover:scale-110">
                             <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
-                                <h3 class="text-white text-xl font-bold">咖啡品牌视觉系统</h3>
-                                <p class="text-white/80 mt-2">LOGO设计、包装设计、宣传物料全套</p>
+                                <h3 class="text-white text-xl font-bold">设计作品2</h3>
+                                <p class="text-white/80 mt-2">品牌视觉系统设计</p>
                                 <a href="#" class="mt-4 inline-block text-primary hover:text-white transition-colors">查看详情 <i class="fa fa-arrow-right ml-1"></i></a>
                             </div>
                         </div>
                     </div>
-                    <!-- 作品3-UI设计（健身APP） -->
+                    <!-- 替换第3张图片 -->
                     <div class="portfolio-item hover-scale" data-category="ui">
                         <div class="relative overflow-hidden rounded-lg shadow-lg">
-                            <img src="https://picsum.photos/id/180/600/400" alt="健身APP界面设计" class="w-full h-64 object-cover transition-transform duration-500 hover:scale-110">
+                            <img src="https://i.postimg.cc/W11cfc4f/wei-xin-tu-pian-20251209221622-81-100.jpg" alt="设计作品3" class="w-full h-64 object-cover transition-transform duration-500 hover:scale-110">
                             <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
-                                <h3 class="text-white text-xl font-bold">健身APP界面设计</h3>
-                                <p class="text-white/80 mt-2">运动记录、课程预约功能UI/UX设计</p>
+                                <h3 class="text-white text-xl font-bold">设计作品3</h3>
+                                <p class="text-white/80 mt-2">UI/UX界面设计</p>
                                 <a href="#" class="mt-4 inline-block text-primary hover:text-white transition-colors">查看详情 <i class="fa fa-arrow-right ml-1"></i></a>
                             </div>
                         </div>
                     </div>
-                    <!-- 作品4-插画（城市印象） -->
+                    <!-- 替换第4张图片 -->
                     <div class="portfolio-item hover-scale" data-category="illustration">
                         <div class="relative overflow-hidden rounded-lg shadow-lg">
-                            <img src="https://picsum.photos/id/76/600/400" alt="城市印象插画集" class="w-full h-64 object-cover transition-transform duration-500 hover:scale-110">
+                            <img src="https://i.postimg.cc/ZRZcV4T7/wei-xin-tu-pian-20251209221717-82-100.jpg" alt="设计作品4" class="w-full h-64 object-cover transition-transform duration-500 hover:scale-110">
                             <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
-                                <h3 class="text-white text-xl font-bold">城市印象插画集</h3>
-                                <p class="text-white/80 mt-2">以扁平化风格绘制的城市地标系列</p>
+                                <h3 class="text-white text-xl font-bold">设计作品4</h3>
+                                <p class="text-white/80 mt-2">创意插画设计</p>
                                 <a href="#" class="mt-4 inline-block text-primary hover:text-white transition-colors">查看详情 <i class="fa fa-arrow-right ml-1"></i></a>
                             </div>
                         </div>
                     </div>
-                    <!-- 作品5-平面设计（音乐节海报） -->
+                    <!-- 保留原有2个占位项（可根据需要替换/删除） -->
                     <div class="portfolio-item hover-scale" data-category="graphic">
                         <div class="relative overflow-hidden rounded-lg shadow-lg">
                             <img src="https://picsum.photos/id/91/600/400" alt="音乐节海报设计" class="w-full h-64 object-cover transition-transform duration-500 hover:scale-110">
@@ -277,7 +314,6 @@
                             </div>
                         </div>
                     </div>
-                    <!-- 作品6-品牌视觉（文创产品） -->
                     <div class="portfolio-item hover-scale" data-category="brand">
                         <div class="relative overflow-hidden rounded-lg shadow-lg">
                             <img src="https://picsum.photos/id/239/600/400" alt="文创产品品牌设计" class="w-full h-64 object-cover transition-transform duration-500 hover:scale-110">
@@ -289,8 +325,6 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- 加载更多按钮 -->
                 <div class="text-center mt-16">
                     <button class="px-8 py-3 border-2 border-primary text-primary rounded-lg font-medium hover:bg-primary hover:text-white transition-colors">
                         加载更多作品
@@ -299,7 +333,7 @@
             </div>
         </section>
 
-        <!-- 联系方式（第3页）- 浅色风格+表单横向居中调整 -->
+        <!-- 联系方式（保持原有） -->
         <section id="contact" class="page-section py-20 bg-neutral text-secondary hidden">
             <div class="container mx-auto px-4 md:px-8 h-full flex flex-col justify-center animate-page-fade">
                 <div class="text-center mb-16">
@@ -309,13 +343,9 @@
                         欢迎合作、交流或咨询，期待与你一起创造更多可能
                     </p>
                 </div>
-
-                <!-- 统一居中布局 -->
                 <div class="max-w-4xl mx-auto">
-                    <!-- 联系信息 - 整体居中 -->
                     <div class="text-center mb-8">
                         <div class="inline-flex flex-col md:flex-row items-start md:items-center gap-8 justify-center">
-                            <!-- 邮箱 -->
                             <div class="flex items-center justify-center">
                                 <div class="bg-primary/10 p-4 rounded-full mr-4">
                                     <i class="fa fa-envelope text-primary text-xl"></i>
@@ -325,7 +355,6 @@
                                     <p class="text-secondary/80">xxx@xxx.com（替换为你的邮箱）</p>
                                 </div>
                             </div>
-                            <!-- 电话 -->
                             <div class="flex items-center justify-center">
                                 <div class="bg-primary/10 p-4 rounded-full mr-4">
                                     <i class="fa fa-phone text-primary text-xl"></i>
@@ -335,7 +364,6 @@
                                     <p class="text-secondary/80">138xxxx8888（替换为你的电话）</p>
                                 </div>
                             </div>
-                            <!-- 所在地 -->
                             <div class="flex items-center justify-center">
                                 <div class="bg-primary/10 p-4 rounded-full mr-4">
                                     <i class="fa fa-map-marker text-primary text-xl"></i>
@@ -346,8 +374,6 @@
                                 </div>
                             </div>
                         </div>
-
-                        <!-- 社交平台 -->
                         <div class="mt-8">
                             <h4 class="text-xl font-bold mb-4">社交平台</h4>
                             <div class="flex justify-center space-x-6 mt-2">
@@ -366,8 +392,6 @@
                             </div>
                         </div>
                     </div>
-
-                    <!-- 横向缩小的留言表单 - 社交平台下方 + 居中 -->
                     <div class="bg-white p-6 rounded-lg shadow-sm max-w-5xl mx-auto">
                         <form class="flex flex-wrap justify-center items-end gap-4">
                             <div class="w-full sm:w-auto">
@@ -394,122 +418,235 @@
         </section>
     </div>
 
-    <!-- 翻页模式核心JS - 移除技能模块相关逻辑，调整页码为4页（0-3） -->
+    <!-- JS部分（新增水面波纹动画 + 原有逻辑） -->
     <script>
-        // 全局变量
-        const pageContainer = document.getElementById('pageContainer');
-        const sections = document.querySelectorAll('.page-section');
-        const navLinks = document.querySelectorAll('[data-page]');
-        const nextPageBtn = document.getElementById('nextPageBtn');
-        let currentPage = 0; // 当前页码（从0开始）
-        const totalPages = sections.length; // 现在是4页（0:首页,1:关于我,2:作品集,3:联系）
-        let isAnimating = false; // 防止快速翻页
+        // ===================== 水面波纹效果核心代码 =====================
+        class WaterRipple {
+            constructor(canvas) {
+                this.canvas = canvas;
+                this.ctx = canvas.getContext('2d');
+                this.width = window.innerWidth;
+                this.height = window.innerHeight;
+                this.canvas.width = this.width;
+                this.canvas.height = this.height;
+                this.ripples = []; // 存储波纹
+                this.lastTime = 0;
+                this.isRunning = false;
 
-        // 1. 移动端菜单切换
-        const menuBtn = document.getElementById('menuBtn');
-        const mobileMenu = document.getElementById('mobileMenu');
-        menuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-            menuBtn.innerHTML = mobileMenu.classList.contains('hidden') ? '<i class="fa fa-bars"></i>' : '<i class="fa fa-times"></i>';
-        });
+                // 初始化
+                this.init();
+            }
 
-        // 2. 导航栏滚动效果（翻页模式下简化）
-        const navbar = document.getElementById('navbar');
-        navbar.classList.add('py-2', 'shadow-md');
+            // 初始化
+            init() {
+                // 监听鼠标移动
+                window.addEventListener('mousemove', (e) => {
+                    this.createRipple(e.clientX, e.clientY);
+                });
+                // 监听窗口大小变化
+                window.addEventListener('resize', () => {
+                    this.width = window.innerWidth;
+                    this.height = window.innerHeight;
+                    this.canvas.width = this.width;
+                    this.canvas.height = this.height;
+                });
+                // 启动动画
+                this.animate();
+            }
 
-        // 3. 翻页核心函数
-        function goToPage(pageNum) {
-            // 边界判断
-            if (pageNum < 0 || pageNum >= totalPages || isAnimating) return;
-            isAnimating = true;
+            // 创建波纹
+            createRipple(x, y) {
+                this.ripples.push({
+                    x: x,
+                    y: y,
+                    radius: 5,
+                    maxRadius: Math.max(this.width, this.height) / 2,
+                    opacity: 0.5,
+                    speed: 3,
+                    decay: 0.005,
+                    color: 'rgba(255, 107, 107, {opacity})' // 主色波纹
+                });
+            }
 
-            // 隐藏当前页，显示目标页
-            sections.forEach((section, index) => {
-                section.classList.add('hidden');
-                if (index === pageNum) {
-                    section.classList.remove('hidden');
+            // 绘制波纹
+            drawRipples(timestamp) {
+                // 清空画布（保留透明度）
+                this.ctx.clearRect(0, 0, this.width, this.height);
+                
+                // 绘制渐变背景（和页面背景融合）
+                const bgGradient = this.ctx.createLinearGradient(0, 0, this.width, this.height);
+                bgGradient.addColorStop(0, 'rgba(250, 251, 252, 0)');
+                bgGradient.addColorStop(1, 'rgba(238, 242, 245, 0)');
+                this.ctx.fillStyle = bgGradient;
+                this.ctx.fillRect(0, 0, this.width, this.height);
+
+                // 绘制所有波纹
+                for (let i = this.ripples.length - 1; i >= 0; i--) {
+                    const ripple = this.ripples[i];
+                    
+                    // 更新波纹属性
+                    ripple.radius += ripple.speed;
+                    ripple.opacity -= ripple.decay;
+                    
+                    // 超出范围或透明度为0则移除
+                    if (ripple.radius > ripple.maxRadius || ripple.opacity <= 0) {
+                        this.ripples.splice(i, 1);
+                        continue;
+                    }
+
+                    // 绘制波纹
+                    this.ctx.beginPath();
+                    this.ctx.arc(ripple.x, ripple.y, ripple.radius, 0, Math.PI * 2);
+                    this.ctx.strokeStyle = ripple.color.replace('{opacity}', ripple.opacity);
+                    this.ctx.lineWidth = 1.5;
+                    this.ctx.stroke();
+
+                    // 内层细波纹（增加层次感）
+                    this.ctx.beginPath();
+                    this.ctx.arc(ripple.x, ripple.y, ripple.radius / 2, 0, Math.PI * 2);
+                    this.ctx.strokeStyle = `rgba(42, 59, 76, ${ripple.opacity * 0.6})`;
+                    this.ctx.lineWidth = 0.8;
+                    this.ctx.stroke();
                 }
-            });
+            }
 
-            // 更新导航激活状态
-            navLinks.forEach(link => {
-                link.classList.remove('nav-active');
-                if (Number(link.dataset.page) === pageNum) {
-                    link.classList.add('nav-active');
+            // 动画循环
+            animate(timestamp = 0) {
+                const deltaTime = timestamp - this.lastTime;
+                this.lastTime = timestamp;
+
+                if (deltaTime > 16) { // 约60fps
+                    this.drawRipples(timestamp);
                 }
-            });
 
-            // 更新当前页码
-            currentPage = pageNum;
-
-            // 解锁动画状态
-            setTimeout(() => {
-                isAnimating = false;
-            }, 600);
+                requestAnimationFrame((time) => this.animate(time));
+            }
         }
 
-        // 4. 导航点击翻页
-        navLinks.forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                const targetPage = Number(link.dataset.page);
-                goToPage(targetPage);
-                // 关闭移动端菜单
-                if (!mobileMenu.classList.contains('hidden')) {
-                    mobileMenu.classList.add('hidden');
-                    menuBtn.innerHTML = '<i class="fa fa-bars"></i>';
-                }
-            });
-        });
-
-        // 5. 鼠标滚轮翻页
-        window.addEventListener('wheel', (e) => {
-            if (isAnimating) return;
-            // 向下滚动 = 下一页，向上滚动 = 上一页
-            const direction = e.deltaY > 0 ? 1 : -1;
-            goToPage(currentPage + direction);
-        });
-
-        // 6. 键盘上下键翻页
-        window.addEventListener('keydown', (e) => {
-            if (isAnimating) return;
-            if (e.key === 'ArrowDown' || e.key === 'PageDown') {
-                goToPage(currentPage + 1);
-            } else if (e.key === 'ArrowUp' || e.key === 'PageUp') {
-                goToPage(currentPage - 1);
+        // 初始化水面波纹（仅在首页加载）
+        window.addEventListener('DOMContentLoaded', () => {
+            const waterCanvas = document.getElementById('waterCanvas');
+            if (waterCanvas) {
+                new WaterRipple(waterCanvas);
             }
-        });
 
-        // 7. 下一页按钮点击
-        nextPageBtn.addEventListener('click', () => {
-            goToPage(currentPage + 1);
-        });
+            // ===================== 原有翻页逻辑 =====================
+            const pageContainer = document.getElementById('pageContainer');
+            const sections = document.querySelectorAll('.page-section');
+            const navLinks = document.querySelectorAll('[data-page]');
+            const nextPageBtn = document.getElementById('nextPageBtn');
+            let currentPage = 0;
+            const totalPages = sections.length;
+            let isAnimating = false;
 
-        // 8. 作品集筛选功能
-        const filterBtns = document.querySelectorAll('.filter-btn');
-        const portfolioItems = document.querySelectorAll('.portfolio-item');
-        filterBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                filterBtns.forEach(b => {
-                    b.classList.remove('active', 'bg-primary', 'text-white');
-                    b.classList.add('bg-white', 'text-secondary');
+            // 移动端菜单
+            const menuBtn = document.getElementById('menuBtn');
+            const mobileMenu = document.getElementById('mobileMenu');
+            menuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                menuBtn.innerHTML = mobileMenu.classList.contains('hidden') ? '<i class="fa fa-bars"></i>' : '<i class="fa fa-times"></i>';
+            });
+
+            // 导航栏滚动效果（优化透明度）
+            const navbar = document.getElementById('navbar');
+            navbar.classList.add('py-2');
+
+            // 翻页核心函数
+            function goToPage(pageNum) {
+                if (pageNum < 0 || pageNum >= totalPages || isAnimating) return;
+                isAnimating = true;
+
+                sections.forEach((section, index) => {
+                    section.classList.add('hidden');
+                    if (index === pageNum) {
+                        section.classList.remove('hidden');
+                    }
                 });
-                btn.classList.add('active', 'bg-primary', 'text-white');
-                btn.classList.remove('bg-white', 'text-secondary');
 
-                const filter = btn.getAttribute('data-filter');
-                portfolioItems.forEach(item => {
-                    if (filter === 'all' || item.getAttribute('data-category') === filter) {
-                        item.style.display = 'block';
-                    } else {
-                        item.style.display = 'none';
+                navLinks.forEach(link => {
+                    link.classList.remove('nav-active');
+                    if (Number(link.dataset.page) === pageNum) {
+                        link.classList.add('nav-active');
+                    }
+                });
+
+                currentPage = pageNum;
+
+                // 导航栏样式随页面变化（参考站风格）
+                if (pageNum === 0) {
+                    navbar.classList.remove('bg-white/95', 'shadow-md');
+                    navbar.classList.add('bg-white/80', 'shadow-none');
+                } else {
+                    navbar.classList.remove('bg-white/80', 'shadow-none');
+                    navbar.classList.add('bg-white/95', 'shadow-md');
+                }
+
+                setTimeout(() => {
+                    isAnimating = false;
+                }, 600);
+            }
+
+            // 导航点击
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const targetPage = Number(link.dataset.page);
+                    goToPage(targetPage);
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                        menuBtn.innerHTML = '<i class="fa fa-bars"></i>';
                     }
                 });
             });
-        });
 
-        // 初始化：显示第一页
-        goToPage(0);
+            // 滚轮翻页
+            window.addEventListener('wheel', (e) => {
+                if (isAnimating) return;
+                const direction = e.deltaY > 0 ? 1 : -1;
+                goToPage(currentPage + direction);
+            });
+
+            // 键盘翻页
+            window.addEventListener('keydown', (e) => {
+                if (isAnimating) return;
+                if (e.key === 'ArrowDown' || e.key === 'PageDown') {
+                    goToPage(currentPage + 1);
+                } else if (e.key === 'ArrowUp' || e.key === 'PageUp') {
+                    goToPage(currentPage - 1);
+                }
+            });
+
+            // 下一页按钮
+            nextPageBtn.addEventListener('click', () => {
+                goToPage(currentPage + 1);
+            });
+
+            // 作品集筛选
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const portfolioItems = document.querySelectorAll('.portfolio-item');
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    filterBtns.forEach(b => {
+                        b.classList.remove('active', 'bg-primary', 'text-white');
+                        b.classList.add('bg-white', 'text-secondary');
+                    });
+                    btn.classList.add('active', 'bg-primary', 'text-white');
+                    btn.classList.remove('bg-white', 'text-secondary');
+
+                    const filter = btn.getAttribute('data-filter');
+                    portfolioItems.forEach(item => {
+                        if (filter === 'all' || item.getAttribute('data-category') === filter) {
+                            item.style.display = 'block';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                });
+            });
+
+            // 初始化
+            goToPage(0);
+        });
     </script>
 </body>
 </html>
