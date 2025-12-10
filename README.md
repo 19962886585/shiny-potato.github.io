@@ -201,7 +201,7 @@
                         </div>
                     </div>
                     <div class="w-full md:w-[65%] flex flex-col justify-start">
-                        <h3 class="text-2xl font-bold mb-4">CR | 设计专业学生</h3>
+                        <h3 class="text-2xl font-bold mb-4">CR | 设计专业</h3>
                         <p class="text-secondary/80 mb-6 leading-relaxed">
                             现就读于苏州大学视觉传达设计专业，擅长将创意理念转化为视觉作品，注重细节与作品表达。
                             目前正在系统学习各类设计知识与技能，持续打磨设计基础能力及审美素养，积极参与校内实践项目以积累经验，
@@ -352,7 +352,7 @@
                                 </div>
                                 <div class="text-left">
                                     <h4 class="text-xl font-bold mb-1">邮箱</h4>
-                                    <p class="text-secondary/80">xxx@xxx.com（替换为你的邮箱）</p>
+                                    <p class="text-secondary/80">2622558252@qq.com</p>
                                 </div>
                             </div>
                             <div class="flex items-center justify-center">
@@ -361,7 +361,7 @@
                                 </div>
                                 <div class="text-left">
                                     <h4 class="text-xl font-bold mb-1">电话</h4>
-                                    <p class="text-secondary/80">138xxxx8888（替换为你的电话）</p>
+                                    <p class="text-secondary/80">19962886585</p>
                                 </div>
                             </div>
                             <div class="flex items-center justify-center">
@@ -370,7 +370,7 @@
                                 </div>
                                 <div class="text-left">
                                     <h4 class="text-xl font-bold mb-1">所在地</h4>
-                                    <p class="text-secondary/80">苏州（替换为你的所在地）</p>
+                                    <p class="text-secondary/80">苏州大学</p>
                                 </div>
                             </div>
                         </div>
