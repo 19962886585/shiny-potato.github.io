@@ -201,7 +201,7 @@
                         </div>
                     </div>
                     <div class="w-full md:w-[65%] flex flex-col justify-start">
-                        <h3 class="text-2xl font-bold mb-4">CR | 设计专业学生</h3>
+                        <h3 class="text-2xl font-bold mb-4">CR | 设计专业</h3>
                         <p class="text-secondary/80 mb-6 leading-relaxed">
                             现就读于苏州大学视觉传达设计专业，擅长将创意理念转化为视觉作品，注重细节与作品表达。
                             目前正在系统学习各类设计知识与技能，持续打磨设计基础能力及审美素养，积极参与校内实践项目以积累经验，
@@ -418,7 +418,7 @@
         </section>
     </div>
 
-    <!-- JS部分（新增水面波纹动画 + 原有逻辑） -->
+    <!-- JS部分（新增水面波纹动画 + 原有逻辑 + 导航栏隐藏逻辑） -->
     <script>
         // ===================== 水面波纹效果核心代码 =====================
         class WaterRipple {
@@ -530,7 +530,7 @@
                 new WaterRipple(waterCanvas);
             }
 
-            // ===================== 原有翻页逻辑 =====================
+            // ===================== 原有翻页逻辑 + 导航栏隐藏逻辑 =====================
             const pageContainer = document.getElementById('pageContainer');
             const sections = document.querySelectorAll('.page-section');
             const navLinks = document.querySelectorAll('[data-page]');
@@ -551,7 +551,7 @@
             const navbar = document.getElementById('navbar');
             navbar.classList.add('py-2');
 
-            // 翻页核心函数
+            // 翻页核心函数（修改：关于我(pageNum=1)和作品集(pageNum=2)都隐藏导航栏）
             function goToPage(pageNum) {
                 if (pageNum < 0 || pageNum >= totalPages || isAnimating) return;
                 isAnimating = true;
@@ -572,13 +572,21 @@
 
                 currentPage = pageNum;
 
-                // 导航栏样式随页面变化（参考站风格）
-                if (pageNum === 0) {
-                    navbar.classList.remove('bg-white/95', 'shadow-md');
-                    navbar.classList.add('bg-white/80', 'shadow-none');
+                // ========== 核心修改：关于我(pageNum=1) + 作品集(pageNum=2) 隐藏导航栏 ==========
+                if (pageNum === 1 || pageNum === 2) {
+                    // 隐藏导航栏（平滑过渡）
+                    navbar.classList.add('opacity-0', 'pointer-events-none');
+                    navbar.classList.remove('bg-white/80', 'bg-white/95', 'shadow-md', 'shadow-none');
                 } else {
-                    navbar.classList.remove('bg-white/80', 'shadow-none');
-                    navbar.classList.add('bg-white/95', 'shadow-md');
+                    // 显示导航栏并恢复对应样式
+                    navbar.classList.remove('opacity-0', 'pointer-events-none');
+                    if (pageNum === 0) { // 首页
+                        navbar.classList.remove('bg-white/95', 'shadow-md');
+                        navbar.classList.add('bg-white/80', 'shadow-none');
+                    } else { // 联系页(pageNum=3)
+                        navbar.classList.remove('bg-white/80', 'shadow-none');
+                        navbar.classList.add('bg-white/95', 'shadow-md');
+                    }
                 }
 
                 setTimeout(() => {
