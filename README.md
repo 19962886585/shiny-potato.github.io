@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CR | 设计 - 翻页模式</title>
+    <title>CR | 设计</title>
     <!-- 引入Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- 引入Font Awesome -->
@@ -82,7 +82,7 @@
                 writing-mode: vertical-rl;
                 text-orientation: upright;
             }
-            /* 翻页模式核心样式 */
+            /* 核心样式 */
             html, body {
                 overflow: hidden;
                 height: 100%;
@@ -437,6 +437,7 @@
             <a href="#" class="text-2xl font-bold text-primary tracking-tight cursor-pointer hover:cursor-none">CR Design</a>
             <!-- 桌面端导航 -->
             <div class="hidden md:flex space-x-10 text-lg font-medium font-heiti">
+                <div class="hidden md:flex space-x-10 text-lg font-medium font-heiti">
                 <a href="#home" class="nav-active hover:text-primary transition-colors duration-300 cursor-pointer hover:cursor-none" data-page="0">首页</a>
                 <a href="#about" class="hover:text-primary transition-colors duration-300 cursor-pointer hover:cursor-none" data-page="1">关于我</a>
                 <a href="#portfolio" class="hover:text-primary transition-colors duration-300 cursor-pointer hover:cursor-none" data-page="2">作品集</a>
@@ -458,7 +459,7 @@
         </div>
     </nav>
 
-    <!-- 翻页容器 -->
+    <!-- 翻页容器（保留功能，仅移除文字描述） -->
     <div id="pageContainer" class="h-full w-full">
         <!-- 首页 -->
         <section id="home" class="page-section flex items-center justify-center bg-gradient-to-br from-[#fafbfc] to-[#eef2f5]">
@@ -489,7 +490,7 @@
                 </div>
             </div>
 
-            <!-- 翻页提示 -->
+            <!-- 翻页提示（保留功能，仅移除文字描述） -->
             <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10 animate-bounce">
                 <button class="text-secondary/40 hover:text-primary transition-colors duration-300 cursor-pointer hover:cursor-none" id="nextPageBtn">
                     <i class="fa fa-chevron-down text-xl"></i>
@@ -572,104 +573,104 @@
                     <button class="filter-btn px-6 py-2 rounded-full bg-white text-secondary hover:bg-primary hover:text-white transition-colors cursor-pointer hover:cursor-none" data-filter="illustration">插画</button>
                 </div>
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- 作品1 - 替换为第一张新图 -->
+                    <!-- 作品1 - 桂花特写摄影 -->
                     <div class="portfolio-item hover-scale cursor-pointer hover:cursor-none" 
                          data-category="graphic"
-                         data-title="极简风格视觉设计"
+                         data-title="桂花特写 | 自然摄影"
                          data-img="https://i.postimg.cc/8ccK8q1y/wei-xin-tu-pian-20251124200020-48-2.jpg"
-                         data-desc="本作品以极简主义为核心设计理念，去除冗余元素，仅保留核心视觉符号，通过色彩对比和版式留白营造高级感。整体采用单色系搭配，线条简洁流畅，适用于品牌视觉识别系统、海报等多场景应用。"
-                         data-tools="Photoshop, Illustrator"
-                         data-type="平面设计">
+                         data-desc="这组桂花特写摄影作品聚焦于生活中的自然景致，通过精准的对焦与光影捕捉，展现桂花花瓣的细腻纹理与自然姿态。摒弃繁杂构图，以极简的视觉语言突出自然本身的美感，记录日常中易被忽略的自然之美，让平凡的生活瞬间成为视觉焦点。"
+                         data-tools="单反相机、Lightroom、Photoshop"
+                         data-type="自然摄影">
                         <div class="relative overflow-hidden rounded-lg shadow-lg">
-                            <img src="https://i.postimg.cc/8ccK8q1y/wei-xin-tu-pian-20251124200020-48-2.jpg" alt="极简风格视觉设计" class="w-full h-64 object-cover transition-transform duration-500 hover:scale-110">
+                            <img src="https://i.postimg.cc/8ccK8q1y/wei-xin-tu-pian-20251124200020-48-2.jpg" alt="桂花特写 | 自然摄影" class="w-full h-64 object-cover transition-transform duration-500 hover:scale-110">
                             <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
-                                <h3 class="text-white text-xl font-bold">极简风格视觉设计</h3>
-                                <p class="text-white/80 mt-2">基于极简风格的设计创作</p>
+                                <h3 class="text-white text-xl font-bold">桂花特写 | 自然摄影</h3>
+                                <p class="text-white/80 mt-2">生活中的自然景致特写</p>
                                 <a href="javascript:void(0)" class="mt-4 inline-block text-primary hover:text-white transition-colors">查看详情 <i class="fa fa-arrow-right ml-1"></i></a>
                             </div>
                         </div>
                     </div>
-                    <!-- 作品2 - 替换为第二张新图 -->
-                    <div class="portfolio-item hover-scale cursor-pointer hover:cursor-none" 
-                         data-category="brand"
-                         data-title="品牌视觉系统全案设计"
-                         data-img="https://i.postimg.cc/nhGPDKwz/wei-xin-tu-pian-20251124200021-49-2.jpg"
-                         data-desc="为新锐文创品牌打造完整的视觉识别系统，包含LOGO设计、标准色/辅助色规范、字体系统、应用场景延展（名片、包装、海报等）。设计结合传统文化元素与现代审美，强化品牌记忆点，提升品牌辨识度。"
-                         data-tools="Illustrator, InDesign, Figma"
-                         data-type="品牌视觉">
-                        <div class="relative overflow-hidden rounded-lg shadow-lg">
-                            <img src="https://i.postimg.cc/nhGPDKwz/wei-xin-tu-pian-20251124200021-49-2.jpg" alt="品牌视觉系统全案设计" class="w-full h-64 object-cover transition-transform duration-500 hover:scale-110">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
-                                <h3 class="text-white text-xl font-bold">品牌视觉系统全案设计</h3>
-                                <p class="text-white/80 mt-2">品牌视觉系统设计</p>
-                                <a href="javascript:void(0)" class="mt-4 inline-block text-primary hover:text-white transition-colors">查看详情 <i class="fa fa-arrow-right ml-1"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- 作品3 - 替换为第三张新图 -->
-                    <div class="portfolio-item hover-scale cursor-pointer hover:cursor-none" 
-                         data-category="ui"
-                         data-title="移动端APP界面设计"
-                         data-img="https://i.postimg.cc/zfPpCxwH/wei-xin-tu-pian-20251209221622-81-100.jpg"
-                         data-desc="为生活类APP设计的核心界面，遵循iOS/Android设计规范，注重用户体验与交互逻辑。采用卡片式布局、柔和渐变色彩，简化操作流程，提升页面加载效率与视觉舒适度，包含首页、分类页、个人中心等核心页面。"
-                         data-tools="Figma, Photoshop, Procreate"
-                         data-type="UI/UX设计">
-                        <div class="relative overflow-hidden rounded-lg shadow-lg">
-                            <img src="https://i.postimg.cc/zfPpCxwH/wei-xin-tu-pian-20251209221622-81-100.jpg" alt="移动端APP界面设计" class="w-full h-64 object-cover transition-transform duration-500 hover:scale-110">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
-                                <h3 class="text-white text-xl font-bold">移动端APP界面设计</h3>
-                                <p class="text-white/80 mt-2">UI/UX界面设计</p>
-                                <a href="javascript:void(0)" class="mt-4 inline-block text-primary hover:text-white transition-colors">查看详情 <i class="fa fa-arrow-right ml-1"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- 作品4 - 替换为第四张新图 -->
-                    <div class="portfolio-item hover-scale cursor-pointer hover:cursor-none" 
-                         data-category="illustration"
-                         data-title="治愈系创意插画设计"
-                         data-img="https://i.postimg.cc/R03wB4f9/wei-xin-tu-pian-20251209221831-83-100.jpg"
-                         data-desc="以自然、治愈为主题的系列插画，采用手绘质感结合数字绘画技法，色彩柔和温暖，线条灵动自然。适用于书籍装帧、文创产品、社交媒体配图等场景，传递轻松、治愈的情感氛围。"
-                         data-tools="Procreate, Photoshop, Illustrator"
-                         data-type="创意插画">
-                        <div class="relative overflow-hidden rounded-lg shadow-lg">
-                            <img src="https://i.postimg.cc/R03wB4f9/wei-xin-tu-pian-20251209221831-83-100.jpg" alt="治愈系创意插画设计" class="w-full h-64 object-cover transition-transform duration-500 hover:scale-110">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
-                                <h3 class="text-white text-xl font-bold">治愈系创意插画设计</h3>
-                                <p class="text-white/80 mt-2">创意插画设计</p>
-                                <a href="javascript:void(0)" class="mt-4 inline-block text-primary hover:text-white transition-colors">查看详情 <i class="fa fa-arrow-right ml-1"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- 作品5 - 替换为第五张新图 -->
+                    <!-- 作品2 - 一树桂花摄影（修改后的内容） -->
                     <div class="portfolio-item hover-scale cursor-pointer hover:cursor-none" 
                          data-category="graphic"
-                         data-title="自定义设计作品"
-                         data-img="https://i.postimg.cc/ZKT3qr3j/wei-xin-tu-pian-20251215212107-98-100.jpg"
-                         data-desc="这是我的最新设计作品，结合现代设计风格与创意表现手法，注重视觉层次与细节表达，展现独特的设计视角和审美理念。"
-                         data-tools="Photoshop, Illustrator"
-                         data-type="平面设计">
+                         data-title="一树桂花 | 自然摄影"
+                         data-img="https://i.postimg.cc/nhGPDKwz/wei-xin-tu-pian-20251124200021-49-2.jpg"
+                         data-desc="这组一树桂花的摄影作品以整体视角记录生活中的自然景致，捕捉桂花满树的繁茂姿态与光影层次。通过自然光线的运用，展现桂花树的整体轮廓与枝叶间桂花的错落美感，用镜头留存日常中桂花盛放的美好瞬间，还原自然本真的视觉体验。"
+                         data-tools="单反相机、Lightroom、Photoshop"
+                         data-type="自然摄影">
                         <div class="relative overflow-hidden rounded-lg shadow-lg">
-                            <img src="https://i.postimg.cc/ZKT3qr3j/wei-xin-tu-pian-20251215212107-98-100.jpg" alt="自定义设计作品" class="w-full h-64 object-cover transition-transform duration-500 hover:scale-110">
+                            <img src="https://i.postimg.cc/nhGPDKwz/wei-xin-tu-pian-20251124200021-49-2.jpg" alt="一树桂花 | 自然摄影" class="w-full h-64 object-cover transition-transform duration-500 hover:scale-110">
                             <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
-                                <h3 class="text-white text-xl font-bold">自定义设计作品</h3>
-                                <p class="text-white/80 mt-2">现代创意平面设计</p>
+                                <h3 class="text-white text-xl font-bold">一树桂花 | 自然摄影</h3>
+                                <p class="text-white/80 mt-2">生活中的自然景致记录</p>
                                 <a href="javascript:void(0)" class="mt-4 inline-block text-primary hover:text-white transition-colors">查看详情 <i class="fa fa-arrow-right ml-1"></i></a>
                             </div>
                         </div>
                     </div>
-                    <!-- 作品6 - 保留原有图片 -->
+                    <!-- 作品3 - 夕阳景色摄影（修改后的内容） -->
                     <div class="portfolio-item hover-scale cursor-pointer hover:cursor-none" 
-                         data-category="brand"
-                         data-title="传统文化文创品牌设计"
-                         data-img="https://i.postimg.cc/4NnR60Tk/wei-xin-tu-pian-20251210132449-84-100.jpg"
-                         data-desc="基于非遗传统文化元素的文创品牌设计，提取传统纹样、色彩体系进行现代化重构，设计包含LOGO、产品包装、周边衍生品等。既保留传统文化底蕴，又符合现代消费审美，提升文创产品的市场接受度。"
-                         data-tools="Illustrator, InDesign, Photoshop"
-                         data-type="品牌视觉">
+                         data-category="graphic"
+                         data-title="夕阳景致 | 生活摄影"
+                         data-img="https://i.postimg.cc/zfPpCxwH/wei-xin-tu-pian-20251209221622-81-100.jpg"
+                         data-desc="这组夕阳景色摄影作品聚焦于生活中的傍晚风景，捕捉日落时分天空与自然环境交织的唯美瞬间。通过对光线、色彩与构图的精准把控，记录日常中易被忽略的傍晚景致，用镜头留存夕阳的温暖与治愈，展现平凡生活中的自然之美。"
+                         data-tools="单反相机、Lightroom、Photoshop"
+                         data-type="生活摄影">
                         <div class="relative overflow-hidden rounded-lg shadow-lg">
-                            <img src="https://i.postimg.cc/4NnR60Tk/wei-xin-tu-pian-20251210132449-84-100.jpg" alt="传统文化文创品牌设计" class="w-full h-64 object-cover transition-transform duration-500 hover:scale-110">
+                            <img src="https://i.postimg.cc/zfPpCxwH/wei-xin-tu-pian-20251209221622-81-100.jpg" alt="夕阳景致 | 生活摄影" class="w-full h-64 object-cover transition-transform duration-500 hover:scale-110">
                             <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
-                                <h3 class="text-white text-xl font-bold">文创产品品牌设计</h3>
-                                <p class="text-white/80 mt-2">基于传统文化元素的文创品牌视觉</p>
+                                <h3 class="text-white text-xl font-bold">夕阳景致 | 生活摄影</h3>
+                                <p class="text-white/80 mt-2">生活中的傍晚风景记录</p>
+                                <a href="javascript:void(0)" class="mt-4 inline-block text-primary hover:text-white transition-colors">查看详情 <i class="fa fa-arrow-right ml-1"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 作品4 - 空中的云 | 自然摄影（修改后的内容） -->
+                    <div class="portfolio-item hover-scale cursor-pointer hover:cursor-none" 
+                         data-category="graphic"
+                         data-title="空中的云 | 自然摄影"
+                         data-img="https://i.postimg.cc/R03wB4f9/wei-xin-tu-pian-20251209221831-83-100.jpg"
+                         data-desc="这组空中的云摄影作品聚焦于生活中易被忽略的自然景色特写，捕捉云层在不同光线、不同时段下的形态与色彩变化。通过极简的构图与精准的曝光控制，展现云朵的轻盈质感与自然韵律，用镜头定格天空中瞬息万变的自然之美，记录日常里的诗意瞬间。"
+                         data-tools="单反相机、Lightroom、Photoshop"
+                         data-type="自然摄影">
+                        <div class="relative overflow-hidden rounded-lg shadow-lg">
+                            <img src="https://i.postimg.cc/R03wB4f9/wei-xin-tu-pian-20251209221831-83-100.jpg" alt="空中的云 | 自然摄影" class="w-full h-64 object-cover transition-transform duration-500 hover:scale-110">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                                <h3 class="text-white text-xl font-bold">空中的云 | 自然摄影</h3>
+                                <p class="text-white/80 mt-2">生活中的自然景色特写</p>
+                                <a href="javascript:void(0)" class="mt-4 inline-block text-primary hover:text-white transition-colors">查看详情 <i class="fa fa-arrow-right ml-1"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 作品5 - 路边的树 | 自然摄影（修改后的内容） -->
+                    <div class="portfolio-item hover-scale cursor-pointer hover:cursor-none" 
+                         data-category="graphic"
+                         data-title="路边的树 | 自然摄影"
+                         data-img="https://i.postimg.cc/ZKT3qr3j/wei-xin-tu-pian-20251215212107-98-100.jpg"
+                         data-desc="这组路边的树摄影作品是对生活中自然景色的随拍记录，捕捉树木在日常环境中的自然姿态与光影变化。以简约的构图展现树木的原生美感，记录平凡生活中易被忽略的自然景致，传递自然与日常交融的视觉温度。"
+                         data-tools="单反相机、Lightroom、Photoshop"
+                         data-type="自然摄影">
+                        <div class="relative overflow-hidden rounded-lg shadow-lg">
+                            <img src="https://i.postimg.cc/ZKT3qr3j/wei-xin-tu-pian-20251215212107-98-100.jpg" alt="路边的树 | 自然摄影" class="w-full h-64 object-cover transition-transform duration-500 hover:scale-110">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                                <h3 class="text-white text-xl font-bold">路边的树 | 自然摄影</h3>
+                                <p class="text-white/80 mt-2">生活中的自然景色随拍</p>
+                                <a href="javascript:void(0)" class="mt-4 inline-block text-primary hover:text-white transition-colors">查看详情 <i class="fa fa-arrow-right ml-1"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 作品6 - 质感表达 | 设计基础练习作业（修改为手绘工具版本） -->
+                    <div class="portfolio-item hover-scale cursor-pointer hover:cursor-none" 
+                         data-category="graphic"
+                         data-title="质感表达 | 设计基础练习"
+                         data-img="https://i.postimg.cc/4NnR60Tk/wei-xin-tu-pian-20251210132449-84-100.jpg"
+                         data-desc="本次设计基础练习作业聚焦于手绘质感表达，以彩铅、马克笔、素描纸为核心创作工具，通过不同手绘技法探索各类材质的视觉与触觉特征。从基础的线条轻重、叠色层次、笔触肌理入手，练习如何通过手绘方式还原金属、布料、木质等不同材质的质感表现，重点打磨手绘控笔能力、光影层次感与材质细节刻画能力，夯实设计手绘基础。"
+                         data-tools="彩铅、马克笔、素描纸、橡皮擦、高光笔"
+                         data-type="手绘质感练习">
+                        <div class="relative overflow-hidden rounded-lg shadow-lg">
+                            <img src="https://i.postimg.cc/4NnR60Tk/wei-xin-tu-pian-20251210132449-84-100.jpg" alt="质感表达 | 设计基础练习" class="w-full h-64 object-cover transition-transform duration-500 hover:scale-110">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                                <h3 class="text-white text-xl font-bold">质感表达 | 设计基础练习</h3>
+                                <p class="text-white/80 mt-2">设计基础 - 手绘质感表现练习</p>
                                 <a href="javascript:void(0)" class="mt-4 inline-block text-primary hover:text-white transition-colors">查看详情 <i class="fa fa-arrow-right ml-1"></i></a>
                             </div>
                         </div>
@@ -934,7 +935,7 @@
             // 初始化自定义光标
             initCustomCursor();
 
-            // 翻页逻辑
+            // 翻页逻辑（保留功能，仅移除文字描述）
             const pageContainer = document.getElementById('pageContainer');
             const sections = document.querySelectorAll('.page-section');
             const navLinks = document.querySelectorAll('[data-page]');
@@ -955,7 +956,7 @@
             const navbar = document.getElementById('navbar');
             navbar.classList.add('py-2');
 
-            // 翻页核心函数
+            // 翻页核心函数（保留功能，仅移除文字描述）
             function goToPage(pageNum) {
                 if (pageNum < 0 || pageNum >= totalPages || isAnimating) return;
                 isAnimating = true;
