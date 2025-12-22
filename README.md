@@ -437,7 +437,6 @@
             <a href="#" class="text-2xl font-bold text-primary tracking-tight cursor-pointer hover:cursor-none">CR Design</a>
             <!-- 桌面端导航 -->
             <div class="hidden md:flex space-x-10 text-lg font-medium font-heiti">
-                <div class="hidden md:flex space-x-10 text-lg font-medium font-heiti">
                 <a href="#home" class="nav-active hover:text-primary transition-colors duration-300 cursor-pointer hover:cursor-none" data-page="0">首页</a>
                 <a href="#about" class="hover:text-primary transition-colors duration-300 cursor-pointer hover:cursor-none" data-page="1">关于我</a>
                 <a href="#portfolio" class="hover:text-primary transition-colors duration-300 cursor-pointer hover:cursor-none" data-page="2">作品集</a>
