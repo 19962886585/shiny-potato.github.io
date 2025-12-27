@@ -554,7 +554,7 @@
             </div>
         </section>
 
-        <!-- 作品集 - 已替换为新的图片链接 -->
+        <!-- 作品集 - 优化工具名称后的核心内容 -->
         <section id="portfolio" class="page-section py-20 bg-neutral">
             <div class="container mx-auto px-4 md:px-8 h-full flex flex-col justify-center animate-page-fade">
                 <div class="text-center mb-16">
@@ -572,13 +572,13 @@
                     <button class="filter-btn px-6 py-2 rounded-full bg-white text-secondary hover:bg-primary hover:text-white transition-colors cursor-pointer hover:cursor-none" data-filter="illustration">插画</button>
                 </div>
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- 作品1 - 桂花特写摄影 -->
+                    <!-- 作品1 - 桂花特写 | 自然摄影（优化工具） -->
                     <div class="portfolio-item hover-scale cursor-pointer hover:cursor-none" 
                          data-category="graphic"
                          data-title="桂花特写 | 自然摄影"
                          data-img="https://i.postimg.cc/8ccK8q1y/wei-xin-tu-pian-20251124200020-48-2.jpg"
                          data-desc="这组桂花特写摄影作品聚焦于生活中的自然景致，通过精准的对焦与光影捕捉，展现桂花花瓣的细腻纹理与自然姿态。摒弃繁杂构图，以极简的视觉语言突出自然本身的美感，记录日常中易被忽略的自然之美，让平凡的生活瞬间成为视觉焦点。"
-                         data-tools="单反相机、Lightroom、Photoshop"
+                         data-tools="全画幅单反相机（50mm F1.8定焦镜头）、三脚架、Adobe Lightroom Classic、Adobe Photoshop（细节精修）"
                          data-type="自然摄影">
                         <div class="relative overflow-hidden rounded-lg shadow-lg">
                             <img src="https://i.postimg.cc/8ccK8q1y/wei-xin-tu-pian-20251124200020-48-2.jpg" alt="桂花特写 | 自然摄影" class="w-full h-64 object-cover transition-transform duration-500 hover:scale-110">
@@ -589,13 +589,13 @@
                             </div>
                         </div>
                     </div>
-                    <!-- 作品2 - 一树桂花摄影（修改后的内容） -->
+                    <!-- 作品2 - 一树桂花 | 自然摄影（优化工具） -->
                     <div class="portfolio-item hover-scale cursor-pointer hover:cursor-none" 
                          data-category="graphic"
                          data-title="一树桂花 | 自然摄影"
                          data-img="https://i.postimg.cc/nhGPDKwz/wei-xin-tu-pian-20251124200021-49-2.jpg"
                          data-desc="这组一树桂花的摄影作品以整体视角记录生活中的自然景致，捕捉桂花满树的繁茂姿态与光影层次。通过自然光线的运用，展现桂花树的整体轮廓与枝叶间桂花的错落美感，用镜头留存日常中桂花盛放的美好瞬间，还原自然本真的视觉体验。"
-                         data-tools="单反相机、Lightroom、Photoshop"
+                         data-tools="全画幅单反相机（24-70mm F2.8变焦镜头）、遮光罩（防眩光）、Adobe Lightroom Classic（光影调色）、Adobe Camera Raw"
                          data-type="自然摄影">
                         <div class="relative overflow-hidden rounded-lg shadow-lg">
                             <img src="https://i.postimg.cc/nhGPDKwz/wei-xin-tu-pian-20251124200021-49-2.jpg" alt="一树桂花 | 自然摄影" class="w-full h-64 object-cover transition-transform duration-500 hover:scale-110">
@@ -606,13 +606,13 @@
                             </div>
                         </div>
                     </div>
-                    <!-- 作品3 - 夕阳景色摄影（修改后的内容） -->
+                    <!-- 作品3 - 夕阳景致 | 生活摄影（优化工具） -->
                     <div class="portfolio-item hover-scale cursor-pointer hover:cursor-none" 
                          data-category="graphic"
                          data-title="夕阳景致 | 生活摄影"
                          data-img="https://i.postimg.cc/zfPpCxwH/wei-xin-tu-pian-20251209221622-81-100.jpg"
                          data-desc="这组夕阳景色摄影作品聚焦于生活中的傍晚风景，捕捉日落时分天空与自然环境交织的唯美瞬间。通过对光线、色彩与构图的精准把控，记录日常中易被忽略的傍晚景致，用镜头留存夕阳的温暖与治愈，展现平凡生活中的自然之美。"
-                         data-tools="单反相机、Lightroom、Photoshop"
+                         data-tools="微单相机（16-55mm F2.8镜头）、渐变灰滤镜（平衡光比）、Adobe Lightroom Classic（色温校准）、Adobe Photoshop（暗部细节提升）"
                          data-type="生活摄影">
                         <div class="relative overflow-hidden rounded-lg shadow-lg">
                             <img src="https://i.postimg.cc/zfPpCxwH/wei-xin-tu-pian-20251209221622-81-100.jpg" alt="夕阳景致 | 生活摄影" class="w-full h-64 object-cover transition-transform duration-500 hover:scale-110">
@@ -623,13 +623,13 @@
                             </div>
                         </div>
                     </div>
-                    <!-- 作品4 - 空中的云 | 自然摄影（修改后的内容） -->
+                    <!-- 作品4 - 空中的云 | 自然摄影（优化工具） -->
                     <div class="portfolio-item hover-scale cursor-pointer hover:cursor-none" 
                          data-category="graphic"
                          data-title="空中的云 | 自然摄影"
                          data-img="https://i.postimg.cc/R03wB4f9/wei-xin-tu-pian-20251209221831-83-100.jpg"
                          data-desc="这组空中的云摄影作品聚焦于生活中易被忽略的自然景色特写，捕捉云层在不同光线、不同时段下的形态与色彩变化。通过极简的构图与精准的曝光控制，展现云朵的轻盈质感与自然韵律，用镜头定格天空中瞬息万变的自然之美，记录日常里的诗意瞬间。"
-                         data-tools="单反相机、Lightroom、Photoshop"
+                         data-tools="微单相机（24-105mm F4镜头）、快门线（减少抖动）、Adobe Lightroom Classic（曝光微调）、Adobe Photoshop（杂色去除）"
                          data-type="自然摄影">
                         <div class="relative overflow-hidden rounded-lg shadow-lg">
                             <img src="https://i.postimg.cc/R03wB4f9/wei-xin-tu-pian-20251209221831-83-100.jpg" alt="空中的云 | 自然摄影" class="w-full h-64 object-cover transition-transform duration-500 hover:scale-110">
@@ -640,13 +640,13 @@
                             </div>
                         </div>
                     </div>
-                    <!-- 作品5 - 路边的树 | 自然摄影（修改后的内容） -->
+                    <!-- 作品5 - 路边的树 | 自然摄影（优化工具） -->
                     <div class="portfolio-item hover-scale cursor-pointer hover:cursor-none" 
                          data-category="graphic"
                          data-title="路边的树 | 自然摄影"
                          data-img="https://i.postimg.cc/ZKT3qr3j/wei-xin-tu-pian-20251215212107-98-100.jpg"
                          data-desc="这组路边的树摄影作品是对生活中自然景色的随拍记录，捕捉树木在日常环境中的自然姿态与光影变化。以简约的构图展现树木的原生美感，记录平凡生活中易被忽略的自然景致，传递自然与日常交融的视觉温度。"
-                         data-tools="单反相机、Lightroom、Photoshop"
+                         data-tools="便携微单相机（35mm F1.4定焦镜头）、便携摄影包、Adobe Lightroom Classic（快速调色）、Snapseed（移动端初修）"
                          data-type="自然摄影">
                         <div class="relative overflow-hidden rounded-lg shadow-lg">
                             <img src="https://i.postimg.cc/ZKT3qr3j/wei-xin-tu-pian-20251215212107-98-100.jpg" alt="路边的树 | 自然摄影" class="w-full h-64 object-cover transition-transform duration-500 hover:scale-110">
@@ -657,13 +657,13 @@
                             </div>
                         </div>
                     </div>
-                    <!-- 作品6 - 质感表达 | 设计基础练习作业（修改为手绘工具版本） -->
+                    <!-- 作品6 - 质感表达 | 设计基础练习（优化手绘工具） -->
                     <div class="portfolio-item hover-scale cursor-pointer hover:cursor-none" 
                          data-category="graphic"
                          data-title="质感表达 | 设计基础练习"
                          data-img="https://i.postimg.cc/4NnR60Tk/wei-xin-tu-pian-20251210132449-84-100.jpg"
                          data-desc="本次设计基础练习作业聚焦于手绘质感表达，以彩铅、马克笔、素描纸为核心创作工具，通过不同手绘技法探索各类材质的视觉与触觉特征。从基础的线条轻重、叠色层次、笔触肌理入手，练习如何通过手绘方式还原金属、布料、木质等不同材质的质感表现，重点打磨手绘控笔能力、光影层次感与材质细节刻画能力，夯实设计手绘基础。"
-                         data-tools="彩铅、马克笔、素描纸、橡皮擦、高光笔"
+                         data-tools="水溶性彩铅（辉柏嘉48色）、酒精性马克笔（Touch mark 60色）、80g细纹素描纸、2B/4B铅笔（起稿）、橡皮（樱花软橡皮）、高光笔（三菱）、纸笔（揉擦质感）"
                          data-type="手绘质感练习">
                         <div class="relative overflow-hidden rounded-lg shadow-lg">
                             <img src="https://i.postimg.cc/4NnR60Tk/wei-xin-tu-pian-20251210132449-84-100.jpg" alt="质感表达 | 设计基础练习" class="w-full h-64 object-cover transition-transform duration-500 hover:scale-110">
@@ -683,7 +683,7 @@
             </div>
         </section>
 
-        <!-- 联系方式（已修改） -->
+        <!-- 联系方式（已修改邮箱） -->
         <section id="contact" class="page-section py-20 bg-neutral text-secondary">
             <div class="container mx-auto px-4 md:px-8 h-full flex flex-col justify-center animate-page-fade">
                 <div class="text-center mb-16">
@@ -696,13 +696,14 @@
                 <div class="max-w-4xl mx-auto">
                     <div class="text-center mb-8">
                         <div class="inline-flex flex-col md:flex-row items-start md:items-center gap-8 justify-center">
+                            <!-- 👇 此处为修改后的邮箱地址 -->
                             <div class="flex items-center justify-center cursor-pointer hover:cursor-none">
                                 <div class="bg-primary/10 p-4 rounded-full mr-4 transition-all duration-300 hover:bg-primary/20 hover:scale-110">
                                     <i class="fa fa-envelope text-primary text-xl"></i>
                                 </div>
                                 <div class="text-left">
                                     <h4 class="text-xl font-bold mb-1">邮箱</h4>
-                                    <p class="text-secondary/80">1166449933@qq.com</p>
+                                    <p class="text-secondary/80">cr19962886585@163.com</p>
                                 </div>
                             </div>
                             <div class="flex items-center justify-center cursor-pointer hover:cursor-none">
